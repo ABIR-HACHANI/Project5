@@ -44,11 +44,13 @@ function productselected(product){
     let colorselect = document.getElementById("colors");
    console.log(colorselect);
    console.log(product.colors); 
-    for ( let i = 0; i <product.colors.lenght; i++){
+    for ( let i = 0; i <product.colors.length; i++){
         
         colorselect.innerHTML +=`<option value="${product.colors[i]}">${product.colors[i]}</option>`;
         
-    }
-     
-    
+    }    
+}
+/****ajoutre des produit dans le localstorage */
+const addpanier = () => {
+    let bouton = document.getElementById(addToCart)
 }
