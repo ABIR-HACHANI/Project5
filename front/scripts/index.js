@@ -14,7 +14,7 @@ async function items(){
 
 function getproducts() {
     
-    return fetch("http://localhost:3000/api/products")
+    return fetch(`http://localhost:3000/api/products`)
     
     .then(function(res){
         return res.json();
@@ -32,12 +32,12 @@ function getproducts() {
 function displayproduct(product){
     document.getElementById("items").innerHTML +=`
     
-          <a href="./product.html?id=${product._id}">
+        <a href="./product.html?id=${product._id}">
             <article>
               <img src="${product.imageUrl}" alt="${product.altTxt}">
               <h3 class="productName">${product.name}</h3>
               <p class="productDescription">${product.description}</p>
             </article>
-          </a>
+        </a>
         `
 }
