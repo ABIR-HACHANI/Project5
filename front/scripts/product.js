@@ -45,15 +45,21 @@ function productselected(product){
         
     }    
 }
+function saveBasket(basket){//enregister le LocalStorage
+    localStorage.setItem("product",JSON.stringify(basket));//Transformer le tableau en chaine de caractère en utilisant "la sérialisation" 
+    console.table(basket);
+}
 //verifier si le panier existe sinon le créer
 function getbasket(basket){
-    if ( basket== null){
-      return [];
-    }else{
-        return JSON.parse(basket);
+    if ( basket== null){//Si panier vide
+        
+      return [];//Retourner un tableau vide
+    }else{//Sinon
+        return JSON.parse(basket);//Retourner le panier
 
     }
 }
+
 
 /***Ecouter le clic sur le botton ajouter_au_panier***/
 
@@ -65,20 +71,24 @@ addItemTobasket.addEventListener("click",function(){
     let quantity = document.querySelector("#quantity").value;
     let color = document.querySelector("#colors").value;
     console.log(color);
-    let price = document.querySelector("#price").value;
-    console.log(price);
-    let objectProduct = {id:getproductId(),quantity:quantity,color:color,price:price} ;
+  
+    if(quantity >0 && quantity<=100 && color !=""){
+    let objectProduct = {id:getproductId(),quantity:parseInt(quantity),color:color} ;
+
+    //Gérer la quantitée pour ne pas répeter le meme produit
     let foundProduct = basket.find((p =>p.id == id) && (k =>k.color == color));
     if (foundProduct!= undefined){
-        foundProduct.quantity++;//Ajouter 1 à la quantitée si le produit existe déja
+        foundProduct.quantity = foundProduct.quantity + parseInt(quantity);//Ajouter 1 à la quantitée si le produit existe déja
     }else{
         
-    basket.push(objectProduct);
+    basket.push(objectProduct);//Ajouter le produit dans le panier
     }
 
-    localStorage.setItem("product",JSON.stringify(basket));
-    console.table(basket);
-    alert("Vous avez ajouter ce produit dans le pannier")
+    saveBasket(basket);
+    alert("Vous avez ajouter des produits dans le pannier")
+}else{
+    alert("Veillez choisir une quantitée et un  couleur")
+}
 })
 
 
