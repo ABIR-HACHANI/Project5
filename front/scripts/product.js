@@ -45,7 +45,9 @@ function productselected(product){
         
     }    
 }
-function saveBasket(basket){//enregister le LocalStorage
+
+//Enregister le panier dans le LocalStorage
+function saveBasket(basket){
     localStorage.setItem("product",JSON.stringify(basket));//Transformer le tableau en chaine de caractère en utilisant "la sérialisation" 
     console.table(basket);
 }
@@ -66,7 +68,7 @@ function getbasket(basket){
 let addItemTobasket = document.querySelector("#addToCart");
 addItemTobasket.addEventListener("click",function(){
     let basket=localStorage.getItem("product");
-    basket = getbasket(basket);
+    basket = getbasket(basket);//On recupère le panier qui existe dans le Local storage
     console.log("basket");
     let quantity = document.querySelector("#quantity").value;
     let color = document.querySelector("#colors").value;
@@ -84,7 +86,7 @@ addItemTobasket.addEventListener("click",function(){
     basket.push(objectProduct);//Ajouter le produit dans le panier
     }
 
-    saveBasket(basket);
+    saveBasket(basket);//Enregister le nouveau panier
     alert("Vous avez ajouter des produits dans le pannier")
 }else{
     alert("Veillez choisir une quantitée et un  couleur")
