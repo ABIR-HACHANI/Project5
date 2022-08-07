@@ -53,69 +53,99 @@ async function panierDisplay(){
       </div>
     </article>`
     }
+    removeProduct();
   } else{
   alert("Ajouter des produits");
   }
 }
 panierDisplay()
-
-/*Retirer un produit du panier en utilisant le filtre en inverssant la condition
-function removeBasket(product){
-    let basket = getproductbasket();
-    basket = basket.filter (p => p.id != product.id || p.color != product.color);//à verifier
-    saveBasket(basket);
-}
-removeBasket()*/
-
+//suprimer un produit du panier
 const removeProduct = ()=>{
-  console.log("salut")
-
- let corbeilles = document.getElementsByClassName("deleteItem");
   
-  for(corbeille of corbeilles) {
-    console.log(corbeille)
-      corbeille.addEventListener("click", (e) =>{
-        const article = e.target.closest("article.cart__item")
-        const productId = article.getAttribute('data-id')
-        console.log(productId)
-        const productcolor = article.getAttribute('data-color')
-        console.log(productcolor)
-        /*let basket = getproductbasket();
-        basket = basket.filter (p => p.id != product.id || p.color != product.color);//à verifier
-        saveBasket(basket)*/;})
-      
- };
-}
-removeProduct();
+  let corbeilles = document.getElementsByClassName("deleteItem");
+  for(corbeille of corbeilles) {      
+    corbeille.addEventListener("click", (e) =>{
+        const article = e.target.closest("article.cart__item");
+        const productId = article.getAttribute("data-id");
+        console.log(productId);
+        const productcolor = article.getAttribute("data-color");
+        console.log(productcolor);
+        document
+        .querySelector(`[data-id="${productId}"][data-color="${productcolor}"]`)
+        .remove();
+        let basket = getproductbasket;
+        console.log(basket);
+        basket=basket.filter((p) => p.id != productId || p.color != productcolor);//conserver tous les produits dont id est différent à cet valeur 
+          saveBasket(basket);
+    });
+  }
+};
 
 
-/*Modifier la quantitée 
-function changeQuantity(product,quantity){
-  let basket = getbasket(basket);
-  let foundProduct = basket.find(p =>p.id == id);
+
+//Modifier la quantitée 
+function changeQuantity(){
+  let basket = getproductbasket();
+  const Idproduct = article.getAttribute("data-id");
+  let foundProduct = basket.find(p =>p.id == Idproduct);
   if (foundProduct!= undefined){
      foundProduct.quantity = foundProduct.quantity + parseInt(quantity)
-    if (foundProduct.quantity <=0 ){//si quantité arrive à zero supprimer le produit
-      removeBasket(foundProduct);
+    if (foundProduct.quantity <=0 ){//si la quantité arrive à zero supprimer le produit
+      removeProduct(foundProduct);
     }else{
       saveBasket(basket);
     }
     
   }  
 }
+changeQuantity();
 
+//Total articles
+function getTotalarticles(){
+  let basket = getproductbasket();
+  let TotalArticles = 0;
+  for(let product of basket){
+    TotalArticles += product.quantity;
+  }
+  return TotalArticles;
+}
 
-//Le prix total
+/*Le prix total
 function getTotalPrice(){
-  let basket =getbasket();
+  console.log("salut")
+  let basket =getproductbasket();
+  console.log(basket);
   let Total= 0;
   console.log(TotalPrice);
-  for (let product of basket){
+  for (product of basket){
     Total +=product.quantity * product.price
   }
   return Total;  
   
 }
 getTotalPrice()
-console.log(Total);*/
+console.log(Total);
 
+*/
+//Formulaire de contact
+const Name = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const address = document.getElementById("address");
+const city = document.getElementById("city");
+const email = document.getElementById("email");
+let valueName, valueLastName, valueAddress, valueCity, valueEmail;
+Name.addEventListener("input",function(n){
+  valueName;
+  if(n.target.value.length==0){
+    firstNameErrorMsg.innerHTML ="";
+    console.log("rien");
+    valueName=null;
+    console.log(valueName);
+  }
+  if (n.target.value.match(/^[a-z A-Z]{3,25}$/)){
+    firstNameErrorMsg.innerHTML ="";
+    valueName = e.target.value;
+    console.log("succes");
+    console.log(valueName);
+  }
+});

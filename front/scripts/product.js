@@ -79,14 +79,14 @@ addItemTobasket.addEventListener("click",function(){
 
     //Gérer la quantitée pour ne pas répeter le meme produit
     let foundProduct = basket.find((p =>p.id == id) && (k =>k.color == color));
-    if (foundProduct!= undefined){
-        foundProduct.quantity = foundProduct.quantity + parseInt(quantity);//Ajouter 1 à la quantitée si le produit existe déja
+    if (foundProduct!= undefined){//Si le produit existe déja 
+        foundProduct.quantity = foundProduct.quantity + parseInt(quantity);//alors ajouter 1 à la quantitée 
     }else{
         
-    basket.push(objectProduct);//Ajouter le produit dans le panier
+    basket.push(objectProduct);//Sinon on joute le produit dans le panier
     }
 
-    saveBasket(basket);//Enregister le nouveau panier
+    saveBasket(basket);//Et on enregistre le nouveau panier
     alert("Vous avez ajouter des produits dans le pannier")
 }else{
     alert("Veillez choisir une quantitée et un  couleur")
